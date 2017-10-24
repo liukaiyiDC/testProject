@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>ul.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+    	function add(e){//i
+    		var str = getWbs(e);
+    		$(e).parents('li:first').before(//修改结构注意getWbs()	--不用啦^o^
+    			'<li><span>'+str+'</span><input type="text" /><button onclick="del(this);">删除</button>'+
+			  		'<ul>'+
+			  		//	'<li><span>'+str+'</span><input type="text" /><button onclick="del(this);">删除</button>'+
+			  			'<li><button onclick="add(this);">添加</button></li>'+
+			  		'</ul>'+
+	  			'</li>'
+    		);
+    	}
+    	function del(e){
+    		var $parent = $(e).parents('ul:first');
+    		var li = $(e).parent('li:first').remove();
+    		var spans = $parent.find('span');//ul
+    		for(var i = 0 ; i < spans.length ; i++){
+    			var span = spans[i];
+    			var str = getWbs(span);
+    			span.innerHTML = str;
+    		}
+    	}
+    	function getWbs(e){
+    		var eles = $(e).parents('li:first').prevAll();
+    		var lenBro = eles.length+1;//兄弟排行
+    		var $span = $(e).parents('ul:first').prevAll('span:first');
+    		var str = $span.html();
+    		str += '.'+lenBro;
+    		if(-1!=str.search('0.')){
+	    		str = str.slice(2);
+    		}
+    		return str;
+    	}
+    </script>
+  </head>
+  
+  <body>
+  	<span style="display: none;">0</span>
+  	<input style="display: none;"/>
+  	<button style="display: none;"></button>
+	<ul>
+		<li><button onclick="add(this);">添加</button></li>
+	</ul>
+  </body>
+</html>

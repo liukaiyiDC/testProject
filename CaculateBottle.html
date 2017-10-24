@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>CaculateBottle.html</title>
+	<!-- 
+	public static int timesMax = 1000;
+	public static int amountMax = 10000;
+	private void caculateBottle(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		String data = new String();
+		int money = new Integer(req.getParameter("money"));//
+		int price = new Integer(req.getParameter("price"));//
+		int bottle = 0;
+		int bottleToChange = new Integer(req.getParameter("bottleToChange"));//
+		int cap = 0;
+		int capToChange = new Integer(req.getParameter("capToChange"));//
+		int n = 0;
+		int amount = 0;
+		int times = 1;
+		data = "在有 "+money+" 块钱，每瓶酒 "+price+" 块，"+bottleToChange+" 个空瓶换一瓶酒或者 "+capToChange+" 个盖子换一瓶酒时：<br><br>";
+		n = money / price;
+		if(n > 0){
+			bottle = n;
+			cap = n;
+			data += "第 "+times+" 次，买 "+n+" 瓶，喝完剩 "+bottle+" 空瓶 "+cap+" 瓶盖<br><br>";
+			amount += n;
+			times++;
+		}
+		n = bottle / bottleToChange + cap / capToChange;
+		bottle = bottle % bottleToChange;
+		cap = cap % capToChange;
+		while(n > 0 && times<timesMax && amount<amountMax){
+			data += "第 "+times+" 次，换 "+n+" 瓶，" +
+					"剩 "+bottle+" 空瓶，" +
+					"剩 "+cap+" 瓶盖；<br>";
+			bottle += n;
+			cap += n;
+			data += "喝完剩 "+bottle+" 空瓶 "+cap+" 瓶盖；<br><br>";
+			amount += n;
+			times++;
+			
+			n = bottle / bottleToChange + cap / capToChange;
+			bottle = bottle % bottleToChange;
+			cap = cap % capToChange;
+		}
+		data += "共喝 "+amount+" 瓶，剩 "+bottle+" 个空瓶、 "+cap+" 个盖子";
+		System.out.println(data);
+		if(times>=timesMax || amount>amountMax){
+			data = "这可能是个死循环或者数目太大<br>" +
+				   "如果是因为后者并且还是想知道答案的话。。。<br>那就请联系刘开毅 <u style='color:red;'><i>同时最好送他个好点的电脑</u></i> ^o^<br>" +
+				   "（此次计算已经进行了上万次了呢）";
+		}
+		PrintWriter out = res.getWriter();
+		out.print(data);
+	} 
+	-->
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>啦啦啦小开の算酒瓶小工具</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/ajax.js"></script>
+    <script type="text/javascript">
+    	function caculateBottle(){
+    		var money = $('#money').val();
+    		var price = $('#price').val();
+    		var bottleToChange = $('#bottleToChange').val();
+    		var capToChange = $('#capToChange').val();
+    		
+    		if(money=="" || price=="" || bottleToChange=="" || capToChange==""){
+    			return;
+    		}
+    		if(money == 0 || price == 0 || bottleToChange == 0 || capToChange == 0){
+    			return;
+    		}
+    		if(isNaN(money) || isNaN(price) || isNaN(bottleToChange) || isNaN(capToChange)){
+    			alert("请输入数字 =.=");
+    			return;
+    		}
+    		if(money < 0 || price < 0 || bottleToChange < 0 || capToChange < 0){
+    			alert("请输入正数  =.=||");
+    			return;
+    		}
+    		$('#result').html('请稍后...');
+    		var xhr = getXhr();
+			var path = 'caculateBottle.do?money='+money+'&price='+price+'&bottleToChange='+bottleToChange+'&capToChange='+capToChange;
+			path = path.replace(/\#/g, '%23');
+			console.log(path);
+			xhr.open('get',path);
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState == 4 && xhr.status == 200){
+					var message = xhr.responseText;
+					$('#result').html(message);
+				}
+			}
+			xhr.send(null);
+    	}
+    </script>
+  </head>
+  
+  <body>
+	（假装有背景图片）<br>
+   	起始金额：<input style="width: 50px;" id="money" type="text" value="0" oninput="caculateBottle();">元<br>
+   	每瓶价格：<input style="width: 50px;" id="price" type="text" value="0" oninput="caculateBottle();">元<br>
+    <input style="width: 50px;" id="bottleToChange" type="text" value="0" oninput="caculateBottle();">个空瓶换一瓶酒<br>
+    <input style="width: 50px;" id="capToChange" type="text" value="0" oninput="caculateBottle();">个瓶盖换一瓶酒<br>
+    （假装有样式）<br>
+    <div id="result"></div>
+  </body>
+</html>

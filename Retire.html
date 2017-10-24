@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Retire.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <script type="text/javascript">
+    	window.onload = function(){
+	    	document.documentElement.style.fontSize = document.documentElement.clientWidth / 6.4 + 'px';
+    		setInterval(function(){
+	    		var date = new Date();
+	    		var ms = 1538323200000 - date.getTime();
+	    		var ss = parseInt(ms/1000);
+	    		var day = parseInt(ss/60/60/24);
+	    		var hour = parseInt(ss/60/60%24);
+	    		var min = parseInt(ss/60%60);
+	    		var s = parseInt(ss%60);
+	    		var str = "<br><br><br><br><br><br>"+
+	    				"距离关松玲女士退休还有:<br><br>"+
+	    				day+" 天 "+hour+" 小时 "+min+" 分钟 "+s+" 秒<br><br>"+
+	    				"折合为  "+ss+"  秒<br><br>"+
+	    				"或  "+ms+"  毫秒<br><br>";
+	      		document.getElementById("show").innerHTML = str;
+	      	},10);
+    	}
+    </script>
+  </head>
+  
+  <body>
+  	<div id="show" style="font-size: 20; text-align: center;"></div>
+  </body>
+</html>

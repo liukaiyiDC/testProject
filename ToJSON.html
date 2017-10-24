@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>ToJSON.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+    	function changeToAltered(){
+    		var str = $('#original').val();
+    		str = str.substring(str.indexOf(' [')+2);
+    		str = str.substring(0, str.indexOf('"]"')-3);
+    		str = '"'+str;
+    		str = str.replace(/=/g, "(===)");
+    		str = str.replace(/, /g, "(|||)");
+    		$('#altered').val(str);
+    	}
+    </script>
+  </head>
+  
+  <body>
+  	重写实体类toString：<br/>
+    原文：<textarea style="width: 200px;" id="original"></textarea><button onclick="changeToAltered();">转码</button><br/>
+    译文：<textarea style="width: 200px;" id="altered"></textarea><br/>
+    
+  </body>
+</html>

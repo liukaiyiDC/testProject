@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>alert.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript">
+		//var flag = false;
+		//var a = 0;
+		var confirmInt = 1;
+		window.confirm=function(){
+			var confirmhtml = '<div class="confirm">' + arguments[0]+'<button onclick="confirmReturn1();">确定</button><button onclick="confirmReturn1();">取消</button></div>';
+			$('body').append(confirmhtml);
+		};
+		
+		function confirmReturn1(){
+			$(".confirm").css("display","none");
+			confirmInt = 2;
+		}
+		
+		function confirmReturn2(){
+			$(".confirm").css("display","none");
+			confirmInt = 3;
+		}
+		
+		var id = setInterval(function(){
+				if(confirmInt==2){//同意
+					clearInterval(id);
+					
+					alert(1);
+					
+				}
+				if(confirmInt==3){//不同意
+					clearInterval(id);
+					return;
+				}
+			},10);
+			
+		
+		
+		
+		
+		/*
+		window.alert=function(){
+			if(typeof(arguments[1])=="function"){ 
+				alertReturn2 = arguments[1];
+			} 
+			var alerthtml = arguments[0] + '<button onclick="clickAgain();">clickAgain</button>';
+			$('body').append(alerthtml);
+			
+			var id1 = setInterval(function(){
+						if(flag){
+							//通过定时器的ID来停止它
+							clearInterval(id1);
+							a = 1;
+						}
+					},10);
+					
+			var id2 = setInterval(function(){
+						if(a==1){
+							//通过定时器的ID来停止它
+							clearInterval(id2);
+							console.log(a);
+						}
+					},10);
+			$('body').append('OK2');
+		}
+		
+		function alertReturn1(){
+			$(".alert").css("display","none");
+			alertReturn2();
+		}
+		function alertReturn2(){
+			
+		}
+		function clickAgain(){
+			flag = true;
+		}
+		
+		function a(){
+			
+			
+		}
+		
+		*/
+	</script>
+  </head>
+  
+  <body>
+  	<!-- <button onclick="alert('1', function(){return(false);});">click</button> -->
+  	<button onclick="confirm('hhh');">click</button>
+  </body>
+</html>
